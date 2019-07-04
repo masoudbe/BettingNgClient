@@ -75,31 +75,11 @@ export class FollowTeamsComponent implements OnInit {
 
     console.log(JSON.stringify(this.followedNameList));
 
-    this.http.get("/api/getVotes")
-      .subscribe(
-        (val: string[]) => {
-          console.log("POST call successful value returned in body", val);
-          this.oldSelectedTeams = val;
-          this.error = "";
-          this.step = ActionType.ShowResult;
-        },
-        err => {
-          console.log("POST call in error", err);
-          this.error = "خطا در فراخوانی سرویس";
-        },
-        () => {
-          console.log("The POST observable is now completed.");
-        });
-
-    debugger
-
-    console.log("1111" + this.oldSelectedTeams);
-
-    // this.http.post("/api/createVote", this.followedNameList)
+    // this.http.get("/api/getVotes")
     //   .subscribe(
-    //     (val) => {
-    //       console.log("POST call successful value returned in body",
-    //         val);
+    //     (val: string[]) => {
+    //       console.log("POST call successful value returned in body", val);
+    //       this.oldSelectedTeams = val;
     //       this.error = "";
     //       this.step = ActionType.ShowResult;
     //     },
@@ -110,6 +90,26 @@ export class FollowTeamsComponent implements OnInit {
     //     () => {
     //       console.log("The POST observable is now completed.");
     //     });
+
+    // debugger
+
+    console.log("1111" + this.oldSelectedTeams);
+
+    this.http.post(this.fData.getSetverPath() + "/api/createVote", this.followedNameList)
+      .subscribe(
+        (val) => {
+          console.log("POST call successful value returned in body",
+            val);
+          this.error = "";
+          this.step = ActionType.ShowResult;
+        },
+        err => {
+          console.log("POST call in error", err);
+          this.error = "خطا در فراخوانی سرویس";
+        },
+        () => {
+          console.log("The POST observable is now completed.");
+        });
   }
 
   back() {

@@ -23,11 +23,7 @@ const routes: Routes = [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule,
-    RouterModule.forRoot([
-      { path: 'teams', component: FollowTeamsComponent },
-      { path: 'players', component: FollowPlayersComponent },
-    ])
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

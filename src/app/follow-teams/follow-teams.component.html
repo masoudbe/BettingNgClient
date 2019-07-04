@@ -1,6 +1,5 @@
-
-<h2 style="text-align: right" *ngIf="this.step.toString() == '1'">تیم محبوب خود را انتخاب کنید:</h2>
-<table class="table" dir="rtl" *ngIf="this.step.toString() == '1'">
+<h2 style="text-align: right;font-family: Tahoma" *ngIf="this.step.toString() == '1'">تیم محبوب خود را انتخاب کنید:</h2>
+<table class="table table-hover" dir="rtl" *ngIf="this.step.toString() == '1'">
   <tr style="text-align: right">
     <td colspan="1">
       <button class="btn btn-success" (click)="save()">تایید</button>
@@ -9,13 +8,11 @@
       <h2 style="text-align: right;color: red" *ngIf="this.error != ''">{{ this.error }}</h2>
     </td>
   </tr>
-  <thead>
   <tr style="text-align: right">
-    <th></th>
-    <th>نام تیم</th>
-    <th>بازیکنان تیم</th>
+    <th scope="col"></th>
+    <th scope="col">نام تیم</th>
+    <th scope="col">بازیکنان تیم</th>
   </tr>
-  </thead>
   <tbody>
   <tr style="text-align: right" *ngFor="let t of teamList">
     <td><input type="checkbox" [(ngModel)]="t.followed"/></td>
@@ -34,15 +31,12 @@
 </table>
 
 
-
-<h2 style="text-align: right" *ngIf="this.step.toString() == '2'">شما این تیمها را انتخاب کرده اید</h2>
-<table class="table" dir="rtl" *ngIf="this.step.toString() == '2'">
-  <thead>
+<h2 style="font-family: Tahoma;text-align: right" *ngIf="this.step.toString() == '2'">شما این تیمها را انتخاب کرده اید</h2>
+<table class="table table-hover" dir="rtl" *ngIf="this.step.toString() == '2'">
   <tr style="text-align: right">
     <th>نام تیم</th>
     <th>بازیکنان تیم</th>
   </tr>
-  </thead>
   <tbody>
   <tr style="text-align: right" *ngFor="let t of followedTeamList">
     <td [ngClass]="{'bold':t.followed}">{{ t.faName }}</td>

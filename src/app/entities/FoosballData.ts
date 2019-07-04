@@ -7,6 +7,10 @@ import {Injectable} from '@angular/core';
 })
 export class FoosballData {
 
+  public getSetverPath(){
+    return window['serverPath'];
+  }
+
   public getImageURL(){
     return "https://portal/recruitmentFile/GetProfileImage?imageId=";
   }
