@@ -1,7 +1,6 @@
 import {Team} from "./Team";
 import {Player} from "./Player";
 import {Injectable} from '@angular/core';
-import * as _ from "lodash";
 
 @Injectable({
   providedIn: 'root'
