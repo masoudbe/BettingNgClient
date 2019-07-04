@@ -1,0 +1,48 @@
+<h2 style="text-align: right" *ngIf="this.step.toString() == '1'">تیم محبوب خود را انتخاب کنید:</h2>
+<table class="table" dir="rtl" *ngIf="this.step.toString() == '1'">
+  <thead>
+  <tr style="text-align: right">
+    <td colspan="2">
+      <button class="btn btn-success" (click)="save()">تایید</button>
+      <h2 style="text-align: right;color: red" *ngIf="this.error != ''">{{ this.error }}</h2>
+    </td>
+  </tr>
+  <tr style="text-align: right">
+    <th></th>
+    <th>نام تیم</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr style="text-align: right" *ngFor="let p of playerList">
+    <td style="vertical-align: middle"><input type="checkbox" [(ngModel)]="p.followed"/></td>
+    <td style="vertical-align: middle;width: 200px;font-size: 24px" [ngClass]="{'bold':p.followed}">{{ p.faName }}</td>
+    <img [src]="portalPath + p.imageId" alt="" style="width: 200px;height: 200px"/>
+  </tr>
+  <tr style="text-align: right">
+    <td colspan="2">
+      <button class="btn btn-success" (click)="save()">تایید</button>
+      <h2 style="text-align: right;color: red" *ngIf="this.error != ''">{{ this.error }}</h2>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+
+<h2 style="text-align: right" *ngIf="this.step.toString() == '2'">شما این تیمها را انتخاب کرده اید</h2>
+<table class="table" dir="rtl" *ngIf="this.step.toString() == '2'">
+  <thead>
+  <tr style="text-align: right">
+    <th>نام تیم</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr style="text-align: right" *ngFor="let p of followedPlayerList">
+    <td [ngClass]="{'bold':p.followed}">{{ p.faName }}</td>
+  </tr>
+  <tr style="text-align: right">
+    <td>
+      <button class="btn btn-primary" (click)="back()">بازگشت</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
