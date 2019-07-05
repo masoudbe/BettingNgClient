@@ -4,7 +4,7 @@
     <td colspan="1">
       <button class="btn btn-success" (click)="save()">تایید</button>
     </td>
-    <td colspan="2">
+    <td colspan="3">
       <h2 style="text-align: right;color: red" *ngIf="this.error != ''">{{ this.error }}</h2>
     </td>
   </tr>
@@ -12,18 +12,20 @@
     <th scope="col"></th>
     <th scope="col">نام تیم</th>
     <th scope="col">بازیکنان تیم</th>
+    <th></th>
   </tr>
   <tbody>
   <tr style="text-align: right" *ngFor="let t of teamList">
     <td><input type="checkbox" [(ngModel)]="t.followed"/></td>
     <td [ngClass]="{'bold':t.followed}">{{ t.faName }}</td>
     <td [ngClass]="{'bold':t.followed}">{{ t.playerNames }}</td>
+    <td><img *ngFor="let p of t.players" [src]="portalPath + p.imageId" alt="" style="width: 200px;height: 200px"/></td>
   </tr>
   <tr style="text-align: right">
     <td colspan="1">
       <button class="btn btn-success" (click)="save()">تایید</button>
     </td>
-    <td colspan="2">
+    <td colspan="3">
       <h2 style="text-align: right;color: red" *ngIf="this.error != ''">{{ this.error }}</h2>
     </td>
   </tr>

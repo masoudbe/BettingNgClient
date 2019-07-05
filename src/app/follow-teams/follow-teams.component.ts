@@ -27,10 +27,14 @@ export class FollowTeamsComponent implements OnInit {
 
   error: string;
 
+  portalPath: string;
+
   constructor(private http: HttpClient, private fData: FoosballData) {
   }
 
   ngOnInit() {
+
+    this.portalPath = this.fData.getImageURL();
 
     var teams = this.fData.getTeams();
     for (let t of teams.values()) {
