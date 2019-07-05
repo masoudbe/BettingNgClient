@@ -37,7 +37,31 @@ export class FollowTeamsComponent implements OnInit {
       this.teamList.push(t);
     }
 
+    this.getVoted();
+
     this.teamList.sort((a, b) => a.faName.localeCompare(b.faName));
+  }
+
+  getVoted(){
+    this.http.get(this.fData.getSetverPath() + "/api/getVotes")
+      .subscribe(
+        (val: string[]) => {
+          console.log("POST call successful value returned in body111vvvddd", val);
+          this.oldSelectedTeams = val;
+          for(let team of this.teamList){
+            if(this.oldSelectedTeams.indexOf(team.name) != -1){
+              team.followed = true;
+            }
+          }
+          console.log("POST call successful value returned in ddddddd", this.oldSelectedTeams);
+        },
+        err => {
+          console.log("POST call in error", err);
+          this.error = "خطا در فراخوانی سرویس";
+        },
+        () => {
+          console.log("The POST observable is now completed.");
+        });
   }
 
   save() {
@@ -75,27 +99,11 @@ export class FollowTeamsComponent implements OnInit {
 
     console.log(JSON.stringify(this.followedNameList));
 
-    // this.http.get("/api/getVotes")
-    //   .subscribe(
-    //     (val: string[]) => {
-    //       console.log("POST call successful value returned in body", val);
-    //       this.oldSelectedTeams = val;
-    //       this.error = "";
-    //       this.step = ActionType.ShowResult;
-    //     },
-    //     err => {
-    //       console.log("POST call in error", err);
-    //       this.error = "خطا در فراخوانی سرویس";
-    //     },
-    //     () => {
-    //       console.log("The POST observable is now completed.");
-    //     });
 
-    // debugger
 
     console.log("1111" + this.oldSelectedTeams);
 
-    this.http.post(this.fData.getSetverPath() + "/api/createVote", this.followedNameList)
+    this.http.post(this.fData.getSetverPath() + "/api/createVotes", this.followedNameList)
       .subscribe(
         (val) => {
           console.log("POST call successful value returned in body",

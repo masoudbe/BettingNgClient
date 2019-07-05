@@ -73,7 +73,7 @@ export class FollowPlayersComponent implements OnInit {
 
     console.log(JSON.stringify(this.followedNameList));
 
-    this.http.post(this.fData.getSetverPath() + "/api/createVote", this.followedNameList)
+    this.http.post(this.fData.getSetverPath() + "/api/createVotes", this.followedNameList)
       .subscribe(
         (val) => {
           console.log("POST call successful value returned in body",
