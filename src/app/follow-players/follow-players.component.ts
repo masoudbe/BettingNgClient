@@ -20,6 +20,8 @@ export class FollowPlayersComponent implements OnInit {
 
   followedNameList: string[] = [];
 
+  oldSelectedTeams: string[];
+
   error: string;
 
   portalPath: string;
@@ -36,6 +38,28 @@ export class FollowPlayersComponent implements OnInit {
     }
 
     this.playerList.sort((a, b) => a.faName.localeCompare(b.faName));
+  }
+
+  getVoted(){
+    this.http.get(this.fData.getSetverPath() + "/api/getVotes")
+      .subscribe(
+        (val: string[]) => {
+          console.log("POST call successful value returned in body111vvvddd", val);
+          this.oldSelectedTeams = val;
+          for(let player of this.playerList){
+            if(this.oldSelectedTeams.indexOf(player.name) != -1){
+              player.followed = true;
+            }
+          }
+          console.log("POST call successful value returned in ddddddd", this.oldSelectedTeams);
+        },
+        err => {
+          console.log("POST call in error", err);
+          this.error = "خطا در فراخوانی سرویس";
+        },
+        () => {
+          console.log("The POST observable is now completed.");
+        });
   }
 
   save() {
