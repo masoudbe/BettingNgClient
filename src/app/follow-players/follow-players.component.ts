@@ -46,12 +46,13 @@ export class FollowPlayersComponent implements OnInit {
 
   getVoted(){
 
-    // const httpOptions = {
-    //   headers: new HttpHeaders({
-    //     'Content-Type':  'application/json',
-    //     'Authorization': 'my-auth-token'
-    //   })
-    // };
+    //**
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'my-auth-token'
+      })
+    };
 
     var _options = {
       headers: new HttpHeaders(
