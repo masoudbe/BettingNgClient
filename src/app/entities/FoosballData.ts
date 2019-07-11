@@ -21,7 +21,7 @@ export class FoosballData {
     teamMap.set("A1", new Team("A1", "سام", false, []));
     teamMap.set("A2", new Team("A2", "اسلوموشن", false, []));
     teamMap.set("A3", new Team("A3", "بزن بهادر", false, []));
-    teamMap.set("A4", new Team("A4", "بزن بهادر", false, []));
+    teamMap.set("A4", new Team("A4", "سه تفنگدار", false, []));
     teamMap.set("A5", new Team("A5", "رویین تنان قدیم", false, []));
     teamMap.set("B1", new Team("B1", "خرچنگهای سیاه", false, []));
     teamMap.set("B2", new Team("B2", "مادرز اف دراگون", false, []));
@@ -176,7 +176,7 @@ export class FoosballData {
     imageMap.set("C31", "ffbf15b5f8f5e81180e30050569da093");
     imageMap.set("C32", "");
 
-    imageMap.set("C41", "d8a4c2b320ace71180d20050569da093");
+    imageMap.set("C41", "1463dac0e158e91180e50050569da093");
     imageMap.set("C42", "");
 
     imageMap.set("C51", "d8a4c2b320ace71180d20050569da093");
@@ -186,10 +186,10 @@ export class FoosballData {
     imageMap.set("D12", "869c1e7e3effe51180c40050569da093");
 
     imageMap.set("D21", "83b3cbef259de81180db0050569da093");
-    imageMap.set("D22", "83b3cbef259de81180db0050569da093");
+    imageMap.set("D22", "83e38e91d1a8e71180d20050569da093");
 
-    imageMap.set("D31", "143121b71d13e91180e40050569da093");
-    imageMap.set("D32", "6ae975c53effe51180c40050569da093");
+    imageMap.set("D31", "6ae975c53effe51180c40050569da093");
+    imageMap.set("D32", "143121b71d13e91180e40050569da093");
 
     imageMap.set("D41", "a07e5fb4a029e81180d50050569da093");
     imageMap.set("D42", "e0105c203fffe51180c40050569da093");

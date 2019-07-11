@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {ActionType} from "../enums/ActionType";
 import {Player} from "../entities/Player";
 import {FoosballData} from "../entities/FoosballData";
+import {HttpHeaders} from "@angular/common/http";
 
 @Component({
   selector: 'app-follow-players',
@@ -20,13 +21,14 @@ export class FollowPlayersComponent implements OnInit {
 
   followedNameList: string[] = [];
 
-  oldSelectedTeams: string[];
+  oldSelectedPlayers: string[];
 
   error: string;
 
   portalPath: string;
 
-  constructor(private http: HttpClient, private fData: FoosballData) {}
+  constructor(private http: HttpClient, private fData: FoosballData) {
+  }
 
   ngOnInit() {
 
@@ -37,21 +39,43 @@ export class FollowPlayersComponent implements OnInit {
       this.playerList.push(t);
     }
 
+    this.getVoted();
+
     this.playerList.sort((a, b) => a.faName.localeCompare(b.faName));
   }
 
   getVoted(){
-    this.http.get(this.fData.getSetverPath() + "/api/getVotes")
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'my-auth-token'
+      })
+    };
+
+    var _options = {
+      headers: new HttpHeaders(
+        {
+          'Access-Control-Allow-Credentials': 'true',
+          'Access-Control-Allow-Origin': '*'
+        }
+      )
+    };
+
+    this.http.get(this.fData.getSetverPath() + "/getVotes", _options)
       .subscribe(
         (val: string[]) => {
           console.log("POST call successful value returned in body111vvvddd", val);
-          this.oldSelectedTeams = val;
-          for(let player of this.playerList){
-            if(this.oldSelectedTeams.indexOf(player.name) != -1){
-              player.followed = true;
+          this.oldSelectedPlayers = val;
+          if(this.oldSelectedPlayers != null){
+            for(let player of this.playerList){
+              if(this.oldSelectedPlayers.indexOf(player.name) != -1){
+                player.followed = true;
+              }
             }
           }
-          console.log("POST call successful value returned in ddddddd", this.oldSelectedTeams);
+
+          console.log("POST call successful value returned in ddddddd", this.oldSelectedPlayers);
         },
         err => {
           console.log("POST call in error", err);

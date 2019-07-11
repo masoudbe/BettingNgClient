@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Team} from "../entities/Team";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ActionType} from "../enums/ActionType";
 import {Player} from "../entities/Player";
 import {FoosballData} from "../entities/FoosballData";
@@ -46,17 +46,37 @@ export class FollowTeamsComponent implements OnInit {
     this.teamList.sort((a, b) => a.faName.localeCompare(b.faName));
   }
 
-  getVoted(){
-    this.http.get(this.fData.getSetverPath() + "/api/getVotes")
+  getVoted() {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'my-auth-token'
+      })
+    };
+
+    var _options = {
+      headers: new HttpHeaders(
+        {
+          'Access-Control-Allow-Credentials': 'true',
+          'Access-Control-Allow-Origin': '*'
+        }
+      )
+    };
+
+    this.http.get(this.fData.getSetverPath() + "/getVotes", _options)
       .subscribe(
         (val: string[]) => {
           console.log("POST call successful value returned in body111vvvddd", val);
           this.oldSelectedTeams = val;
-          for(let team of this.teamList){
-            if(this.oldSelectedTeams.indexOf(team.name) != -1){
-              team.followed = true;
+          if (this.oldSelectedTeams != null) {
+            for (let team of this.teamList) {
+              if (this.oldSelectedTeams.indexOf(team.name) != -1) {
+                team.followed = true;
+              }
             }
           }
+
           console.log("POST call successful value returned in ddddddd", this.oldSelectedTeams);
         },
         err => {
@@ -102,7 +122,6 @@ export class FollowTeamsComponent implements OnInit {
     }
 
     console.log(JSON.stringify(this.followedNameList));
-
 
 
     console.log("1111" + this.oldSelectedTeams);
