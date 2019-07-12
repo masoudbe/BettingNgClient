@@ -48,13 +48,6 @@ export class FollowTeamsComponent implements OnInit {
 
   getVoted() {
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': 'my-auth-token'
-      })
-    };
-
     var _options = {
       headers: new HttpHeaders(
         {
@@ -67,7 +60,7 @@ export class FollowTeamsComponent implements OnInit {
     this.http.get(this.fData.getSetverPath() + "/getVotes", _options)
       .subscribe(
         (val: string[]) => {
-          console.log("POST call successful value returned in body111vvvddd", val);
+          console.log("GET call successful value returned in body for get votes", val);
           this.oldSelectedTeams = val;
           if (this.oldSelectedTeams != null) {
             for (let team of this.teamList) {
@@ -76,15 +69,13 @@ export class FollowTeamsComponent implements OnInit {
               }
             }
           }
-
-          console.log("POST call successful value returned in ddddddd", this.oldSelectedTeams);
         },
         err => {
-          console.log("POST call in error", err);
+          console.log("POST call in error for get votes", err);
           this.error = "خطا در فراخوانی سرویس";
         },
         () => {
-          console.log("The POST observable is now completed.");
+          console.log("The GET observable is now completed.");
         });
   }
 
@@ -107,7 +98,7 @@ export class FollowTeamsComponent implements OnInit {
     }
 
     if (this.followedTeamList.length == 0) {
-      this.error = "لطفا حداقل یک تیم را انتخاب کنید";
+      this.error = "حداقل یک تیم را انتخاب کنید";
       return;
     }
     else if (this.followedTeamList.length > 3) {
@@ -123,19 +114,16 @@ export class FollowTeamsComponent implements OnInit {
 
     console.log(JSON.stringify(this.followedNameList));
 
-
-    console.log("1111" + this.oldSelectedTeams);
-
     this.http.post(this.fData.getSetverPath() + "/api/createVotes", this.followedNameList)
       .subscribe(
         (val) => {
-          console.log("POST call successful value returned in body",
+          console.log("POST call successful value returned in body for create votes",
             val);
           this.error = "";
           this.step = ActionType.ShowResult;
         },
         err => {
-          console.log("POST call in error", err);
+          console.log("POST call in error for create votes", err);
           this.error = "خطا در فراخوانی سرویس";
         },
         () => {
