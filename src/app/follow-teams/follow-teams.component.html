@@ -18,8 +18,8 @@
   <tbody>
   <tr style="text-align: right" *ngFor="let t of teamList">
     <td><input type="checkbox" [(ngModel)]="t.followed"/></td>
-    <td [ngClass]="{'bold':t.followed}">{{ t.faName }}</td>
-    <td [ngClass]="{'bold':t.followed}">{{ t.playerNames }}</td>
+    <td [ngClass]="{'highlight':t.followed}">{{ t.faName }}</td>
+    <td [ngClass]="{'highlight':t.followed}">{{ t.playerNames }}</td>
     <td>
       <div class="row">
         <div class="col-*-*" *ngFor="let p of t.players">

@@ -15,7 +15,7 @@
   <tbody>
   <tr style="text-align: right" *ngFor="let p of playerList">
     <td style="vertical-align: middle"><input type="checkbox" [(ngModel)]="p.followed"/></td>
-    <td style="vertical-align: middle;width: 200px;font-size: 24px" [ngClass]="{'bold':p.followed}">{{ p.faName }}</td>
+    <td style="vertical-align: middle;width: 200px;font-size: 24px" [ngClass]="{'highlight':p.followed}">{{ p.faName }}</td>
     <!--<img *ngIf="p.imageId != ''" [src]="portalPath + p.imageId" alt="" class="img-fluid" style="width: 170px;height: 170px"/>-->
   </tr>
   <tr style="text-align: right">
