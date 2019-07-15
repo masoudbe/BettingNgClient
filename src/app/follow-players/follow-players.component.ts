@@ -5,6 +5,7 @@ import {ActionType} from "../enums/ActionType";
 import {Player} from "../entities/Player";
 import {FoosballData} from "../entities/FoosballData";
 import {HttpHeaders} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-follow-players',
@@ -27,7 +28,7 @@ export class FollowPlayersComponent implements OnInit {
 
   portalPath: string;
 
-  constructor(private http: HttpClient, private fData: FoosballData) {
+  constructor(private http: HttpClient, private fData: FoosballData, private router: Router) {
   }
 
   ngOnInit() {
@@ -44,25 +45,16 @@ export class FollowPlayersComponent implements OnInit {
     this.playerList.sort((a, b) => a.faName.localeCompare(b.faName));
   }
 
-  getVoted(){
+  getVoted() {
 
-    var _options = {
-      headers: new HttpHeaders(
-        {
-          'Access-Control-Allow-Credentials': 'true',
-          'Access-Control-Allow-Origin': '*'
-        }
-      )
-    };
-
-    this.http.get(this.fData.getSetverPath() + "/getVotes", _options)
+    this.http.get(this.fData.getSetverPath() + "/api/getVotes")
       .subscribe(
         (val: string[]) => {
           console.log("GET call successful value returned in body for get votes", val);
           this.oldSelectedPlayers = val;
-          if(this.oldSelectedPlayers != null){
-            for(let player of this.playerList){
-              if(this.oldSelectedPlayers.indexOf(player.name) != -1){
+          if (this.oldSelectedPlayers != null) {
+            for (let player of this.playerList) {
+              if (this.oldSelectedPlayers.indexOf(player.name) != -1) {
                 player.followed = true;
               }
             }
@@ -70,11 +62,17 @@ export class FollowPlayersComponent implements OnInit {
         },
         err => {
           console.log("POST call in error for getVoted", err);
-          this.error = "خطا در فراخوانی سرویس";
+          this.error = "شما به اطلاعات دسترسی ندارید";
+          this.router.navigate(['/notallowed']);
+          this.playerList = [];
         },
         () => {
           console.log("The GET observable is now completed.");
         });
+  }
+
+  toggleSelect(player) {
+    player.followed = !player.followed;
   }
 
   save() {

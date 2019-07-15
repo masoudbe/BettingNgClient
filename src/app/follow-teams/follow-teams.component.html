@@ -1,12 +1,10 @@
-<h2 style="text-align: right;font-family: Tahoma" *ngIf="this.step.toString() == '1'">تیمهای محبوب خود را انتخاب
+<h2 style="text-align: right;" *ngIf="this.step.toString() == '1'">تیمهای محبوب خود را انتخاب
   کنید:</h2>
-<table class="table table-hover" dir="rtl" *ngIf="this.step.toString() == '1'">
+<table class="table col-6 table-hover" dir="rtl" *ngIf="this.step.toString() == '1'">
   <tr style="text-align: right">
-    <td colspan="1">
-      <button class="btn btn-success" (click)="save()">تایید</button>
-    </td>
-    <td colspan="3">
-      <h2 style="text-align: right;color: red" *ngIf="this.error != ''">{{ this.error }}</h2>
+    <td colspan="4" style="text-align: center">
+      <button class="btn btn-success" style="width: 30%" (click)="save()">تایید</button>
+      <h2 style="text-align: center;color: red;border: 1px solid red;border-radius: 10px;padding: 20px 0;margin: 10px 0;font-size: 20px" *ngIf="this.error">{{ this.error }}</h2>
     </td>
   </tr>
   <tr style="text-align: right">
@@ -16,31 +14,28 @@
     <th></th>
   </tr>
   <tbody>
-  <tr style="text-align: right" *ngFor="let t of teamList">
+  <tr style="text-align: right;cursor: pointer;" *ngFor="let t of teamList" (click)="toggleSelect(t)">
     <td><input type="checkbox" [(ngModel)]="t.followed"/></td>
     <td [ngClass]="{'highlight':t.followed}">{{ t.faName }}</td>
     <td [ngClass]="{'highlight':t.followed}">{{ t.playerNames }}</td>
     <td>
       <div class="row">
         <div class="col-*-*" *ngFor="let p of t.players">
-          <!--<img *ngIf="p.imageId != ''" [src]="portalPath + p.imageId" alt="" class="img-fluid" style="width: 170px;height: 170px"/>-->
+          <img *ngIf="p.imageId != ''" [src]="portalPath + p.imageId" alt="{{ p.faName }}" class="img-fluid user-pic" style="width: 170px;height: 170px"/>
         </div>
       </div>
     </td>
   </tr>
   <tr style="text-align: right">
-    <td colspan="1">
-      <button class="btn btn-success" (click)="save()">تایید</button>
-    </td>
-    <td colspan="3">
-      <h2 style="text-align: right;color: red" *ngIf="this.error != ''">{{ this.error }}</h2>
+    <td colspan="4" style="text-align: center">
+      <button class="btn btn-success" style="width: 30%" (click)="save()">تایید</button>
+      <h2 style="text-align: center;color: red;border: 1px solid red;border-radius: 10px;padding: 20px 0;margin: 10px 0;font-size: 20px" *ngIf="this.error">{{ this.error }}</h2>
     </td>
   </tr>
   </tbody>
 </table>
 
-
-<h2 style="font-family: Tahoma;text-align: right" *ngIf="this.step.toString() == '2'">شما این تیمها را انتخاب کرده
+<h2 style="text-align: right" *ngIf="this.step.toString() == '2'">شما این تیمها را انتخاب کرده
   اید</h2>
 <table class="table table-hover" dir="rtl" *ngIf="this.step.toString() == '2'">
   <tr style="text-align: right">

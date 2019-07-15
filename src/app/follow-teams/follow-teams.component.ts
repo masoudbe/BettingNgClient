@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ActionType} from "../enums/ActionType";
 import {Player} from "../entities/Player";
 import {FoosballData} from "../entities/FoosballData";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-follow-teams',
@@ -29,7 +30,7 @@ export class FollowTeamsComponent implements OnInit {
 
   portalPath: string;
 
-  constructor(private http: HttpClient, private fData: FoosballData) {
+  constructor(private http: HttpClient, private fData: FoosballData, private router: Router) {
   }
 
   ngOnInit() {
@@ -48,16 +49,7 @@ export class FollowTeamsComponent implements OnInit {
 
   getVoted() {
 
-    var _options = {
-      headers: new HttpHeaders(
-        {
-          'Access-Control-Allow-Credentials': 'true',
-          'Access-Control-Allow-Origin': '*'
-        }
-      )
-    };
-
-    this.http.get(this.fData.getSetverPath() + "/getVotes", _options)
+    this.http.get(this.fData.getSetverPath() + "/api/getVotes")
       .subscribe(
         (val: string[]) => {
           console.log("GET call successful value returned in body for get votes", val);
@@ -72,11 +64,17 @@ export class FollowTeamsComponent implements OnInit {
         },
         err => {
           console.log("POST call in error for get votes", err);
-          this.error = "خطا در فراخوانی سرویس";
+          this.error = "شما به اطلاعات دسترسی ندارید";
+          this.router.navigate(['/notallowed']);
+          this.teamList = [];
         },
         () => {
           console.log("The GET observable is now completed.");
         });
+  }
+
+  toggleSelect(team){
+    team.followed = !team.followed;
   }
 
   save() {

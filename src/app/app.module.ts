@@ -7,6 +7,7 @@ import {FollowTeamsComponent} from './follow-teams/follow-teams.component';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {FollowPlayersComponent} from './follow-players/follow-players.component';
+import { NotAllowedComponent } from './not-allowed/not-allowed.component';
 
 const routes: Routes = [
   {path: 'teams', component: FollowTeamsComponent},
@@ -17,7 +18,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     FollowTeamsComponent,
-    FollowPlayersComponent
+    FollowPlayersComponent,
+    NotAllowedComponent
   ],
   imports: [
     BrowserModule,
